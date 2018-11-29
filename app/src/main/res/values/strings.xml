@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Pietjesbak</string>
+    <string name="speler1">Speler1</string>
+    <string name="speler2">Speler2</string>
+    <string name="score1">Score: 0</string>
+    <string name="score2">Score: 0</string>
+    <string name="dobbel1">1</string>
+    <string name="dobbel2">1</string>
+    <string name="dobbel3">1</string>
+    <string name="worpen">3</string>
 </resources>
