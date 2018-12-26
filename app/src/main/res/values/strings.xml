@@ -9,4 +9,10 @@
     <string name="dobbel3">1</string>
     <string name="worpen">3</string>
     <string name="roll">Roll</string>
+    <string name="passTurn">Pass Turn</string>
+    <string name="throwsLeft">Rolls left: 3</string>
+    <string name="currentPlayer">Speler1</string>
+
+    <string name="facebook_application_id" translatable="false">be.arcode.pietjesbak</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">be.arcode.pietjesbak</string>
 </resources>
