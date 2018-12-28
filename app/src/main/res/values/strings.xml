@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Pietjesbak</string>
-    <string name="speler1">Speler1</string>
-    <string name="speler2">Speler2</string>
+    <string name="speler1">Player1</string>
+    <string name="speler2">Player2</string>
     <string name="score1">Score: 0</string>
     <string name="score2">Score: 0</string>
     <string name="dobbel1">1</string>
@@ -12,6 +12,9 @@
     <string name="passTurn">Pass Turn</string>
     <string name="throwsLeft">Rolls left: 3</string>
     <string name="currentPlayer">Speler1</string>
+
+    <string name="namePlayers">Fill in player names</string>
+    <string name="startGame">Start Game!</string>
 
     <string name="facebook_application_id" translatable="false">be.arcode.pietjesbak</string>
     <string name="facebook_login_protocol_scheme" translatable="false">be.arcode.pietjesbak</string>

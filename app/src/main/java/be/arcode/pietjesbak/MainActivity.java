@@ -2,31 +2,29 @@ package be.arcode.pietjesbak;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ImageView;
 import android.view.View;
 import android.widget.Toast;
-
 import java.util.Arrays;
 import java.util.Random;
+
 
 public class MainActivity extends AppCompatActivity {
 
     Button roll, pass;
     TextView player1, player2, tv_score1, tv_score2, tvRollsLeft;
     ImageView dice1img, dice2img, dice3img, lines1img, lines2img;
-    int rollsLeft = 3, score = 0, valueDice1, valueDice2, valueDice3, scorePlayer1, scorePlayer2;
-    boolean player1active = true;
+    int rollsLeft = 3, score = 0, valueDice1, valueDice2, valueDice3, scorePlayer1, scorePlayer2, linesPlayer1 =5, linesPlayer2 = 5;
+    boolean player1active = true, canSwipePlayer1 = false, canSwipePlayer2 = false;
     boolean check69[] = {false, false, false};
-    String scoreText;
-
-
+    String scoreText, swipeLines, winner, loser;
     private int min = 1, max = 6;
 
 
@@ -49,11 +47,17 @@ public class MainActivity extends AppCompatActivity {
         lines1img = (ImageView) findViewById(R.id.lines1);
         lines2img = (ImageView) findViewById(R.id.lines2);
 
+
+        player1.setText(getIntent().getExtras().getString("namePlayer1"));
+        player2.setText(getIntent().getExtras().getString("namePlayer2"));
+
+
         roll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rollsLeft -= 1;
                 tvRollsLeft.setText("Rolls left: " + String.valueOf(rollsLeft));
+                pass.setEnabled(true);
 
                 diceRoll();
                 calculateScore();
@@ -102,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                         player1active = false;
                         rollsLeft = 3 - rollsLeft;
                         tvRollsLeft.setText("Rolls left: " + String.valueOf(rollsLeft));
+                        pass.setEnabled(false);
 
                     } else {
                         player2.setTextColor(getResources().getColor(R.color.TextColor));
@@ -119,6 +124,92 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+        });
+
+        lines1img.setOnTouchListener(new OnSwipeTouchListener(this) {
+            @Override
+            public void onSwipeDown() {
+                if(canSwipePlayer1){
+                    drawLinesPlayer1();
+                    canSwipePlayer1 = false;
+                }else{
+                    Toast.makeText(MainActivity.this, player1.getText() + " should win a round to swipe lines away!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            @Override
+            public void onSwipeUp() {
+                if(canSwipePlayer1){
+                    drawLinesPlayer1();
+                    canSwipePlayer1 = false;
+                }else{
+                    Toast.makeText(MainActivity.this, player1.getText() + " should win a round to swipe lines away!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            @Override
+            public void onSwipeLeft() {
+                if(canSwipePlayer1){
+                    drawLinesPlayer1();
+                    canSwipePlayer1 = false;
+                }else{
+                    Toast.makeText(MainActivity.this, player1.getText() + " should win a round to swipe lines away!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            @Override
+            public void onSwipeRight() {
+                if(canSwipePlayer1){
+                    drawLinesPlayer1();
+                    canSwipePlayer1 = false;
+                }else{
+                    Toast.makeText(MainActivity.this, player1.getText() + " should win a round to swipe lines away!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        lines2img.setOnTouchListener(new OnSwipeTouchListener(this) {
+            @Override
+            public void onSwipeDown() {
+                if(canSwipePlayer2){
+                    drawLinesPlayer2();
+                    canSwipePlayer2 = false;
+                }else{
+                    Toast.makeText(MainActivity.this, player2.getText() + " should win a round to swipe lines away!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            @Override
+            public void onSwipeUp() {
+                if(canSwipePlayer2){
+                    drawLinesPlayer2();
+                    canSwipePlayer2 = false;
+                }else{
+                    Toast.makeText(MainActivity.this, player2.getText() + " should win a round to swipe lines away!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            @Override
+            public void onSwipeLeft() {
+                if(canSwipePlayer2){
+                    drawLinesPlayer2();
+                    canSwipePlayer2 = false;
+                }else{
+                    Toast.makeText(MainActivity.this, player2.getText() + " should win a round to swipe lines away!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            @Override
+            public void onSwipeRight() {
+                if(canSwipePlayer2){
+                    drawLinesPlayer2();
+                    canSwipePlayer2 = false;
+                }else{
+                    Toast.makeText(MainActivity.this, player2.getText() + " should win a round to swipe lines away!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
         });
 
     }
@@ -346,6 +437,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
 
+                if (score == 7){
+                    linesPlayer1 +=1;
+                    linesPlayer2 +=1;
+                    drawLinesPlayer1();
+                    drawLinesPlayer2();
+                }
                 scoreText = String.valueOf(score);
                 writeScore();
             }
@@ -384,17 +481,101 @@ public class MainActivity extends AppCompatActivity {
 
     private void compareScores(){
         //compare the scores of current round for the players.
+
         if (scorePlayer1 == scorePlayer2){
             //it's a tie! another roll for both players.
-            showWinner("It's a tie!", "Each player has to roll once more.");
+            rollsLeft = 1;
+            showWinner("It's a tie!", "Play another round!");
 
         } else if(scorePlayer1 > scorePlayer2){
             //Player1 wins this round
-            showWinner(player1.getText() + " wins this round", "Swipe away one of your lines.");
+
+            //Determine how many lines can be swiped away
+            switch (scorePlayer1){
+                case 722:
+                    linesPlayer1 -= 2;
+                    swipeLines = "2";
+                    break;
+                case 733:
+                    linesPlayer1 -= 2;
+                    swipeLines = "2";
+                    break;
+                case 744:
+                    linesPlayer1 -= 2;
+                    swipeLines = "2";
+                    break;
+                case 755:
+                    linesPlayer1 -= 2;
+                    swipeLines = "2";
+                    break;
+                case 766:
+                    linesPlayer1 -= 2;
+                    swipeLines = "2";
+                    break;
+                case 769:
+                    linesPlayer1 -= 3;
+                    swipeLines = "3";
+                    break;
+                case 799:
+                    if (linesPlayer1 == 5){
+                        //uitschakelen speler, andere speler wint
+                    }else {
+                        linesPlayer1 = 0;
+                        swipeLines = "ALL";
+                        break;
+                    }
+                default:
+                    linesPlayer1 -= 1;
+                    swipeLines = "1";
+                    break;
+            }
+            canSwipePlayer1 = true;
+            showWinner(player1.getText() + " wins this round", "Swipe away " + swipeLines + " of your lines.");
 
         } else{
             //Player2 wins this round
-            showWinner(player2.getText() + " wins this round!", "Swipe away one of your lines.");
+
+            //Determine how many lines can be swiped away
+            switch (scorePlayer2){
+                case 722:
+                    linesPlayer2 -= 2;
+                    swipeLines = "2";
+                    break;
+                case 733:
+                    linesPlayer2 -= 2;
+                    swipeLines = "2";
+                    break;
+                case 744:
+                    linesPlayer2 -= 2;
+                    swipeLines = "2";
+                    break;
+                case 755:
+                    linesPlayer2 -= 2;
+                    swipeLines = "2";
+                    break;
+                case 766:
+                    linesPlayer2 -= 2;
+                    swipeLines = "2";
+                    break;
+                case 769:
+                    linesPlayer2 -= 3;
+                    swipeLines = "3";
+                    break;
+                case 799:
+                    if (linesPlayer2 == 5){
+                        //uitschakelen speler, andere speler wint
+                    }else {
+                        linesPlayer2 = 0;
+                        swipeLines = "ALL";
+                        break;
+                    }
+                default:
+                    linesPlayer2 -= 1;
+                    swipeLines = "1";
+                    break;
+            }
+            canSwipePlayer2 = true;
+            showWinner(player2.getText() + " wins this round!", "Swipe away " + swipeLines + " of your lines.");
 
         }
 
@@ -402,22 +583,121 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showWinner (String winner, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle(winner);
         builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                //close alertDialog
+                dialog.cancel();
+            }
+        });
         builder.show();
     }
 
-    /*linesPlayer1.setOnTouchListener(new OnTouchListener() {
-
-        //if (canSwipePlayer1 == true)
-        public boolean onTouch(View v, MotionEvent event) {
-            // ... Respond to touch events
-
-            //canSwipePlayer1 = false;
-            return true;
+    public void drawLinesPlayer1(){
+        switch (linesPlayer1){
+            case 1:
+                lines1img.setBackgroundResource(R.drawable.lines1);
+                break;
+            case 2:
+                lines1img.setBackgroundResource(R.drawable.lines2);
+                break;
+            case 3:
+                lines1img.setBackgroundResource(R.drawable.lines3);
+                break;
+            case 4:
+                lines1img.setBackgroundResource(R.drawable.lines4);
+                break;
+            case 5:
+                lines1img.setBackgroundResource(R.drawable.lines5);
+                break;
+            default:
+                if(linesPlayer1 > 5){
+                    lines1img.setBackgroundResource(R.drawable.lines5);
+                }else {
+                    lines1img.setBackgroundResource(R.drawable.winner);
+                    winner = (String) player1.getText();
+                    loser = (String) player2.getText();
+                    showFinalWinner(player1.getText() + " has WON the game!", "You can share your victory now!");
+                }
+                break;
         }
-    });*/
+    }
+
+    public void drawLinesPlayer2(){
+        switch (linesPlayer2){
+            case 1:
+                lines2img.setBackgroundResource(R.drawable.lines1);
+                break;
+            case 2:
+                lines2img.setBackgroundResource(R.drawable.lines2);
+                break;
+            case 3:
+                lines2img.setBackgroundResource(R.drawable.lines3);
+                break;
+            case 4:
+                lines2img.setBackgroundResource(R.drawable.lines4);
+                break;
+            case 5:
+                lines2img.setBackgroundResource(R.drawable.lines5);
+                break;
+            default:
+                if(linesPlayer2 > 5){
+                    lines2img.setBackgroundResource(R.drawable.lines5);
+                }else {
+                    lines2img.setBackgroundResource(R.drawable.winner);
+                    //show Final Winner
+                    winner = (String) player2.getText();
+                    loser = (String) player1.getText();
+                    showFinalWinner(player2.getText() + " has WON the game!", "You can share your victory now!");
+                }
+                break;
+        }
+    }
+
+    public void showFinalWinner (String Finalwinner, String message) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle(Finalwinner);
+        builder.setMessage(message);
+        builder.setNeutralButton("Share Victory", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                //share intent
+                Uri imageUri = Uri.parse("android.resource://" + getPackageName()
+                        + "/drawable/" + "ic_launcher");
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, winner + " has WON from " + loser + " in Pietjesbak Game.");
+                shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+                shareIntent.setType("image/jpeg");
+                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                startActivity(Intent.createChooser(shareIntent, "send"));
+
+            }
+        });
+        builder.setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                //reset game
+                dialog.cancel();
+                linesPlayer1 = 5;
+                linesPlayer2 = 5;
+                scorePlayer1 = 0;
+                scorePlayer2 = 0;
+                score = 0;
+                rollsLeft = 3;
+                canSwipePlayer1 = false;
+                canSwipePlayer2 = false;
+                player1active = true;
+                drawLinesPlayer1();
+                drawLinesPlayer2();
+                tv_score1.setText("Score: " + score);
+                tv_score2.setText("Score: " + score);
+            }
+        });
+        builder.show();
+    }
+
 
 }

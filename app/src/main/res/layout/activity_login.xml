@@ -1,8 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:background="@color/DiceTableGreen"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/RelativeLayout03"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp">
+
+
+        <ImageView
+            android:id="@+id/PlayerScreenLogo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@mipmap/ic_launcher"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/namePlayers" />
+
+        <TextView
+            android:id="@+id/namePlayers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/namePlayers"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/ActivePlayer"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/player1Field"
+            android:paddingBottom="10dp"/>
+
+        <EditText
+            android:id="@+id/player1Field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Player1"
+            android:textColorHint="@color/TextColor"
+            android:textColor="@color/TextColor"
+            android:textAlignment="center"
+            android:layout_centerInParent="true"
+            android:paddingBottom="20dp"/>
+
+        <EditText
+            android:id="@+id/player2Field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Player2"
+            android:textColorHint="@color/TextColor"
+            android:textColor="@color/TextColor"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/player1Field"
+            android:layout_marginBottom="25dp"/>
+
+        <Button
+            android:id="@+id/startGameBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/startGame"
+            android:textColor="@color/TextColor"
+            android:backgroundTint="@color/ActivePlayer"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/player2Field"/>
+    </RelativeLayout>
 
 </LinearLayout>
