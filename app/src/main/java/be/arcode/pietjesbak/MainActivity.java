@@ -1,5 +1,6 @@
 package be.arcode.pietjesbak;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -19,7 +23,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     Button roll, pass;
-    TextView player1, player2, tv_score1, tv_score2, tvRollsLeft;
+    TextView player1, player2, tv_score1, tv_score2, tvRollsLeft, quitGame, rules;
     ImageView dice1img, dice2img, dice3img, lines1img, lines2img;
     int rollsLeft = 3, score = 0, valueDice1, valueDice2, valueDice3, scorePlayer1, scorePlayer2, linesPlayer1 =5, linesPlayer2 = 5;
     boolean player1active = true, canSwipePlayer1 = false, canSwipePlayer2 = false;
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private int min = 1, max = 6;
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +51,33 @@ public class MainActivity extends AppCompatActivity {
         pass = (Button) findViewById(R.id.passTurn);
         lines1img = (ImageView) findViewById(R.id.lines1);
         lines2img = (ImageView) findViewById(R.id.lines2);
+        quitGame = (TextView) findViewById(R.id.quitGame);
+        rules = (TextView) findViewById(R.id.rules);
+
 
 
         player1.setText(getIntent().getExtras().getString("namePlayer1"));
         player2.setText(getIntent().getExtras().getString("namePlayer2"));
 
+
+        quitGame.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //Intent to go to the player screen
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+
+        rules.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //Intent to go to rules screen
+                Intent intent = new Intent(MainActivity.this, RulesActivity.class);
+                startActivity(intent);
+            }
+        });
 
         roll.setOnClickListener(new View.OnClickListener() {
             @Override

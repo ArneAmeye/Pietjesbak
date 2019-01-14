@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/DiceTableGreen"
+    tools:context=".MainActivity">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollviewRules"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/RelativeLayout03"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/rulesText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:text="@string/rulesText1"
+                android:textColor="@color/TextColor"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText1"
+                android:paddingBottom="40dp"
+                android:text="@string/rulesText2"
+                android:textColor="@color/TextColor"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText2"
+                android:paddingBottom="10dp"
+                android:text="@string/rulesText3"
+                android:textColor="@color/TextColor"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText3"
+                android:paddingBottom="3dp"
+                android:text="@string/rulesText4"
+                android:textColor="@color/ActivePlayer"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText4"
+                android:paddingBottom="3dp"
+                android:text="@string/rulesText5"
+                android:textColor="@color/ActivePlayer"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText5"
+                android:paddingBottom="3dp"
+                android:text="@string/rulesText6"
+                android:textColor="@color/ActivePlayer"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText6"
+                android:paddingBottom="3dp"
+                android:text="@string/rulesText7"
+                android:textColor="@color/ActivePlayer"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText7"
+                android:paddingBottom="25dp"
+                android:text="@string/rulesText8"
+                android:textColor="@color/ActivePlayer"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText8"
+                android:paddingBottom="3dp"
+                android:text="@string/rulesText9"
+                android:textColor="@color/TextColor"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText9"
+                android:paddingBottom="3dp"
+                android:text="@string/rulesText10"
+                android:textColor="@color/ActivePlayer"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText10"
+                android:paddingBottom="3dp"
+                android:text="@string/rulesText11"
+                android:textColor="@color/ActivePlayer"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText11"
+                android:paddingBottom="40dp"
+                android:text="@string/rulesText12"
+                android:textColor="@color/ActivePlayer"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText12"
+                android:paddingBottom="10dp"
+                android:text="@string/rulesText13"
+                android:textColor="@color/TextColor"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText13"
+                android:paddingBottom="3dp"
+                android:text="@string/rulesText14"
+                android:textColor="@color/ActivePlayer"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText14"
+                android:paddingBottom="3dp"
+                android:text="@string/rulesText15"
+                android:textColor="@color/ActivePlayer"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText15"
+                android:paddingBottom="3dp"
+                android:text="@string/rulesText16"
+                android:textColor="@color/ActivePlayer"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText16"
+                android:paddingBottom="20dp"
+                android:text="@string/rulesText17"
+                android:textColor="@color/ActivePlayer"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText17"
+                android:paddingBottom="10dp"
+                android:text="@string/rulesText18"
+                android:textColor="@color/ActivePlayer"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/rulesText19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rulesText18"
+                android:paddingBottom="20dp"
+                android:text="@string/rulesText19"
+                android:textColor="@color/ActivePlayer"
+                android:textSize="16dp" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/closeRules"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/closeRules"
+        android:textColor="@color/TextColor"
+        android:backgroundTint="@color/ActivePlayer"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal">
+
+    </Button>
+
+</LinearLayout>

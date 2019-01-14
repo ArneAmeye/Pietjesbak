@@ -12,9 +12,34 @@
     <string name="passTurn">Pass Turn</string>
     <string name="throwsLeft">Rolls left: 3</string>
     <string name="currentPlayer">Speler1</string>
+    <string name="quitGame">Quit game</string>
+    <string name="rules">Rules</string>
 
     <string name="namePlayers">Fill in player names</string>
     <string name="startGame">Start Game!</string>
+
+    <string name="closeRules">Close Rules</string>
+    <string name="rulesText1">Each player starts out with 5 chalk lines. Winning a round means you can either swipe away 1, 2 or 3 of your lines depending on what combination you rolled. The first to clear all of his lines wins the game.</string>
+    <string name="rulesText2">The first player throws the dices. He has a maximum of 3 chances every round. He can stop at any time by passing and giving player 2 his turn. That however means player 1 has set the maximum throws for this round. Player 2 always has as much throws as player 1 used in that round but he can pass his turn too if he throws a desired outcome that makes him win already.</string>
+    <string name="rulesText3">When both players have thrown, the round winner is determined through the following combinations (from highest score to lowest):</string>
+    <string name="rulesText4">3 Apen (1-1-1)</string>
+    <string name="rulesText5">Soixante-Neuf (6-5-4 in any order)</string>
+    <string name="rulesText6">Zand: 3x same value (555 is better than 444, etc)</string>
+    <string name="rulesText7">Any Combination: calculated score</string>
+    <string name="rulesText8">Zeven: (2-2-3 in any order)</string>
+    <string name="rulesText9">Calculated scores go like this:</string>
+    <string name="rulesText10">1 = 100 points</string>
+    <string name="rulesText11">6 = 60 points</string>
+    <string name="rulesText12">5,4,3,2 = 5,4,3,2 points</string>
+    <string name="rulesText13">When a tie happens, the round has to be replayed. In All other cases there is a winner and he can swipe:</string>
+    <string name="rulesText14">ALL lines when winning with "3Apen" (1-1-1) *</string>
+    <string name="rulesText15">3 lines when winning with "Soixante-Neuf" (6-5-4)</string>
+    <string name="rulesText16">2 lines when winning with "Zand" (3x same value)</string>
+    <string name="rulesText17">1 line for all other wins</string>
+    <string name="rulesText18">* = HOWEVER when 5 lines left this results in an INSTANT win for the other player!</string>
+    <string name="rulesText19">SPECIAL: a "Zeven" (2-2-3) means all players get +1 on their lines.</string>
+
+
 
     <string name="facebook_application_id" translatable="false">be.arcode.pietjesbak</string>
     <string name="facebook_login_protocol_scheme" translatable="false">be.arcode.pietjesbak</string>
