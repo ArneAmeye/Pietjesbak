@@ -14,8 +14,6 @@ import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.Arrays;
 import java.util.Random;
 
@@ -64,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 //Intent to go to the player screen
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, PregameActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

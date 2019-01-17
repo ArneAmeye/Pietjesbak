@@ -26,7 +26,16 @@
             android:paddingBottom="10dp">
 
             <TextView
+                android:id="@+id/rulesTextTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:text="@string/rulesTitle"
+                android:textColor="@color/TextColor"
+                android:textSize="24dp" />
+            <TextView
                 android:id="@+id/rulesText1"
+                android:layout_below="@id/rulesTextTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
@@ -59,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rulesText3"
+                android:paddingLeft="16dp"
                 android:paddingBottom="3dp"
                 android:text="@string/rulesText4"
                 android:textColor="@color/ActivePlayer"
@@ -69,6 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rulesText4"
+                android:paddingLeft="16dp"
                 android:paddingBottom="3dp"
                 android:text="@string/rulesText5"
                 android:textColor="@color/ActivePlayer"
@@ -79,6 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rulesText5"
+                android:paddingLeft="16dp"
                 android:paddingBottom="3dp"
                 android:text="@string/rulesText6"
                 android:textColor="@color/ActivePlayer"
@@ -89,6 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rulesText6"
+                android:paddingLeft="16dp"
                 android:paddingBottom="3dp"
                 android:text="@string/rulesText7"
                 android:textColor="@color/ActivePlayer"
@@ -99,6 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rulesText7"
+                android:paddingLeft="16dp"
                 android:paddingBottom="25dp"
                 android:text="@string/rulesText8"
                 android:textColor="@color/ActivePlayer"
@@ -119,6 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rulesText9"
+                android:paddingLeft="16dp"
                 android:paddingBottom="3dp"
                 android:text="@string/rulesText10"
                 android:textColor="@color/ActivePlayer"
@@ -129,6 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rulesText10"
+                android:paddingLeft="16dp"
                 android:paddingBottom="3dp"
                 android:text="@string/rulesText11"
                 android:textColor="@color/ActivePlayer"
@@ -139,6 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rulesText11"
+                android:paddingLeft="16dp"
                 android:paddingBottom="40dp"
                 android:text="@string/rulesText12"
                 android:textColor="@color/ActivePlayer"
@@ -221,15 +238,15 @@
 
     <Button
         android:id="@+id/closeRules"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/closeRules"
-        android:textColor="@color/TextColor"
-        android:backgroundTint="@color/ActivePlayer"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal">
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/btn_style"
+        android:backgroundTint="@color/ActivePlayer"
+        android:text="@string/closeRules"
+        android:textColor="@color/TextColor">
 
     </Button>
 

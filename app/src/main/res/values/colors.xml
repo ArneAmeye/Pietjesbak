@@ -7,4 +7,5 @@
     <color name="TextColor">#ffffff</color>
     <color name="PassGrey">#586f7C</color>
     <color name="DiceTableGreen">#009245</color>
+    <color name="formFields">#70b780</color>
 </resources>
