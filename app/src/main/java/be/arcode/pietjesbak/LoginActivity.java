@@ -66,7 +66,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -82,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     loginProgressBar.setVisibility(View.INVISIBLE);
                     loginBtn.setVisibility(View.VISIBLE);
+                    showMessage("Logged in successfully");
                     updateUI();
                 }else{
                     showMessage(task.getException().getMessage());

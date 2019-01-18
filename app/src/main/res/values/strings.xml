@@ -40,6 +40,12 @@
     <string name="rulesText18">* = HOWEVER when 5 lines left this results in an INSTANT win for the other player!</string>
     <string name="rulesText19">SPECIAL: a "Zeven" (2-2-3) means all players get +1 on their lines.</string>
 
-    <string name="registerBtn">Register</string>
-    <string name="loginBtn">Login</string>
+    <string name="registerBtn">Create account</string>
+    <string name="goToRegisterBtn">I need an account</string>
+    <string name="registerTitle">Register</string>
+    <string name="loginTitle">Login</string>
+    <string name="loginBtn">Log me in</string>
+    <string name="logoutBtn">Log out</string>
+
+    <string name="facebook_app_id">284474045547310</string>
 </resources>

@@ -17,6 +17,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/edittext_style"
         android:ems="10"
+        android:gravity="center"
         android:hint="Name"
         android:inputType="textPersonName|textCapSentences|textCapWords"
         android:textColor="@color/TextColor"
@@ -25,22 +26,23 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:background="@drawable/edittext_style"
-        android:hint="Email"
-        android:textColor="@color/TextColor"
         android:id="@+id/regEmail"
         android:layout_width="265dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:background="@drawable/edittext_style"
         android:ems="10"
+        android:gravity="center"
+        android:hint="Email"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        android:textColor="@color/TextColor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -50,9 +52,6 @@
         app:layout_constraintGuide_end="320dp" />
 
     <EditText
-        android:background="@drawable/edittext_style"
-        android:hint="Password"
-        android:textColor="@color/TextColor"
         android:id="@+id/regPassword"
         android:layout_width="265dp"
         android:layout_height="wrap_content"
@@ -61,16 +60,17 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@drawable/edittext_style"
         android:ems="10"
+        android:gravity="center"
+        android:hint="Password"
         android:inputType="textPassword"
+        android:textColor="@color/TextColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/regEmail" />
 
     <EditText
-        android:background="@drawable/edittext_style"
-        android:hint="Confirm password"
-        android:textColor="@color/TextColor"
         android:id="@+id/regPassword2"
         android:layout_width="265dp"
         android:layout_height="wrap_content"
@@ -79,8 +79,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@drawable/edittext_style"
         android:ems="10"
+        android:gravity="center"
+        android:hint="Confirm password"
         android:inputType="textPassword"
+        android:textColor="@color/TextColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/regPassword" />
@@ -126,4 +130,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_launcher" />
+
+    <TextView
+        android:id="@+id/RegisterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/registerTitle"
+        android:textColor="@color/TextColor"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/regName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 </android.support.constraint.ConstraintLayout>

@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class PregameActivity extends AppCompatActivity {
 
-    Button start;
+    Button start, logout;
     EditText editPlayer1, editPlayer2;
     private FirebaseAuth mAuth;
 
@@ -28,6 +28,7 @@ public class PregameActivity extends AppCompatActivity {
         editPlayer1 = (EditText) findViewById(R.id.player1Field);
         editPlayer2 = (EditText) findViewById(R.id.player2Field);
         start = (Button) findViewById(R.id.startGameBtn);
+        logout = (Button) findViewById(R.id.logoutBtn);
         mAuth = FirebaseAuth.getInstance();
 
         editPlayer1.setEnabled(false);
@@ -40,7 +41,7 @@ public class PregameActivity extends AppCompatActivity {
 
                 //check if player names are filled in
                 if (editPlayer1.getText().toString().trim().length() == 0 || editPlayer2.getText().toString().trim().length() == 0){
-                    Toast.makeText(PregameActivity.this, "Please fill in player names!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PregameActivity.this, "Please fill in player name!", Toast.LENGTH_SHORT).show();
                 }else {
                     //Intent to GameScreen / MainActivity
                     Intent intent = new Intent(PregameActivity.this, MainActivity.class);
@@ -53,6 +54,20 @@ public class PregameActivity extends AppCompatActivity {
             }
         });
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //logout from Firebase connection and show message
+                mAuth.signOut();
+                Toast.makeText(getApplicationContext(), "logged out successfully", Toast.LENGTH_LONG ).show();
+
+                //Bring user back to login screen
+                Intent intent = new Intent(PregameActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -62,9 +77,14 @@ public class PregameActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
 
         if(user != null){
-            //fill in logged in username for player1
+            //user logged in, fill in username for player1
             editPlayer1.setText(user.getDisplayName());
 
+        }else{
+            //user not logged in, return to login screen
+            Intent intent = new Intent(PregameActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
     }
 

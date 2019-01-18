@@ -4,15 +4,24 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
+
+import com.facebook.share.model.ShareOpenGraphAction;
+import com.facebook.share.model.ShareOpenGraphContent;
+import com.facebook.share.model.ShareOpenGraphObject;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.widget.ShareDialog;
+
 
 import java.util.Arrays;
 import java.util.Random;
@@ -23,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     Button roll, pass;
     TextView player1, player2, tv_score1, tv_score2, tvRollsLeft, quitGame, rules;
     ImageView dice1img, dice2img, dice3img, lines1img, lines2img;
+    CheckBox chk1, chk2, chk3;
     int rollsLeft = 3, score = 0, valueDice1, valueDice2, valueDice3, scorePlayer1, scorePlayer2, linesPlayer1 =5, linesPlayer2 = 5;
     boolean player1active = true, canSwipePlayer1 = false, canSwipePlayer2 = false;
     boolean check69[] = {false, false, false};
@@ -37,20 +47,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        roll = (Button) findViewById(R.id.roll);
-        player1 = (TextView) findViewById(R.id.player1);
-        player2 = (TextView) findViewById(R.id.player2);
-        tv_score1 = (TextView) findViewById(R.id.score1);
-        tv_score2 = (TextView) findViewById(R.id.score2);
-        dice1img = (ImageView) findViewById(R.id.dice1);
-        dice2img = (ImageView) findViewById(R.id.dice2);
-        dice3img = (ImageView) findViewById(R.id.dice3);
-        tvRollsLeft = (TextView) findViewById(R.id.throwsLeft);
-        pass = (Button) findViewById(R.id.passTurn);
-        lines1img = (ImageView) findViewById(R.id.lines1);
-        lines2img = (ImageView) findViewById(R.id.lines2);
-        quitGame = (TextView) findViewById(R.id.quitGame);
-        rules = (TextView) findViewById(R.id.rules);
+        roll = findViewById(R.id.roll);
+        player1 = findViewById(R.id.player1);
+        player2 = findViewById(R.id.player2);
+        tv_score1 = findViewById(R.id.score1);
+        tv_score2 = findViewById(R.id.score2);
+        dice1img = findViewById(R.id.dice1);
+        dice2img = findViewById(R.id.dice2);
+        dice3img = findViewById(R.id.dice3);
+        tvRollsLeft = findViewById(R.id.throwsLeft);
+        pass = findViewById(R.id.passTurn);
+        lines1img = findViewById(R.id.lines1);
+        lines2img = findViewById(R.id.lines2);
+        quitGame = findViewById(R.id.quitGame);
+        rules = findViewById(R.id.rules);
+        chk1 = findViewById(R.id.chk1);
+        chk2 = findViewById(R.id.chk2);
+        chk3 = findViewById(R.id.chk3);
 
 
 
@@ -80,15 +93,30 @@ public class MainActivity extends AppCompatActivity {
         roll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rollsLeft -= 1;
-                tvRollsLeft.setText("Rolls left: " + String.valueOf(rollsLeft));
-                pass.setEnabled(true);
 
-                diceRoll();
-                calculateScore();
+                //make sure all dices are selected for first roll!
+                if(rollsLeft == 3 && (chk1.isChecked() || chk2.isChecked() || chk3.isChecked() )){
+                    //show toast that player needs to roll al dices the first time
+                    Toast.makeText(MainActivity.this, "First throw needs all dices, deselect them!", Toast.LENGTH_SHORT).show();
+
+                }else{
+                    //not first throw or all dices deselected in first throw, move on with throwing the dices
+                    rollsLeft -= 1;
+                    tvRollsLeft.setText("Rolls left: " + String.valueOf(rollsLeft));
+
+                    diceRoll();
+                    calculateScore();
+
+                }
+
 
                 if(rollsLeft == 0){
+                    //reset checkboxes for next player
+                    chk1.setChecked(false);
+                    chk2.setChecked(false);
+                    chk3.setChecked(false);
 
+                    //switch players
                     if(player1active == true){
                         player1.setTextColor(getResources().getColor(R.color.TextColor));
                         player2.setTextColor(getResources().getColor(R.color.ActivePlayer));
@@ -114,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
 
+                //check if rolled at least 1 time before passing the turn
                 if(rollsLeft == 3) {
                     Context context = getApplicationContext();
                     CharSequence text = "You should roll at least 1 time!";
@@ -124,14 +153,19 @@ public class MainActivity extends AppCompatActivity {
 
 
                 } else{
+                    //reset checkboxes for next player
+                    chk1.setChecked(false);
+                    chk2.setChecked(false);
+                    chk3.setChecked(false);
 
+
+                    //check which player was active and make corresponding game changes
                     if(player1active == true){
                         player1.setTextColor(getResources().getColor(R.color.TextColor));
                         player2.setTextColor(getResources().getColor(R.color.ActivePlayer));
                         player1active = false;
                         rollsLeft = 3 - rollsLeft;
                         tvRollsLeft.setText("Rolls left: " + String.valueOf(rollsLeft));
-                        pass.setEnabled(false);
 
                     } else {
                         player2.setTextColor(getResources().getColor(R.color.TextColor));
@@ -246,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
             Random r = new Random();
             int random = r.nextInt((max - min) + 1) + min;
 
-            if (i == 1){
+            if (i == 1 && !chk1.isChecked()){
 
                 valueDice1 = random;
                 switch(random) {
@@ -270,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             }
-            else if (i == 2){
+            else if (i == 2 && !chk2.isChecked()){
 
                 valueDice2 = random;
                 switch(random) {
@@ -294,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             }
-            else if (i == 3){
+            else if (i == 3 && !chk3.isChecked()){
 
                 valueDice3 = random;
                 switch(random) {
@@ -638,6 +672,21 @@ public class MainActivity extends AppCompatActivity {
             case 5:
                 lines1img.setBackgroundResource(R.drawable.lines5);
                 break;
+            case 6:
+                lines1img.setBackgroundResource(R.drawable.lines6);
+                break;
+            case 7:
+                lines1img.setBackgroundResource(R.drawable.lines7);
+                break;
+            case 8:
+                lines1img.setBackgroundResource(R.drawable.lines8);
+                break;
+            case 9:
+                lines1img.setBackgroundResource(R.drawable.lines9);
+                break;
+            case 10:
+                lines1img.setBackgroundResource(R.drawable.lines10);
+                break;
             default:
                 if(linesPlayer1 > 5){
                     lines1img.setBackgroundResource(R.drawable.lines5);
@@ -668,6 +717,21 @@ public class MainActivity extends AppCompatActivity {
             case 5:
                 lines2img.setBackgroundResource(R.drawable.lines5);
                 break;
+            case 6:
+                lines2img.setBackgroundResource(R.drawable.lines6);
+                break;
+            case 7:
+                lines2img.setBackgroundResource(R.drawable.lines7);
+                break;
+            case 8:
+                lines2img.setBackgroundResource(R.drawable.lines8);
+                break;
+            case 9:
+                lines2img.setBackgroundResource(R.drawable.lines9);
+                break;
+            case 10:
+                lines2img.setBackgroundResource(R.drawable.lines10);
+                break;
             default:
                 if(linesPlayer2 > 5){
                     lines2img.setBackgroundResource(R.drawable.lines5);
@@ -687,41 +751,70 @@ public class MainActivity extends AppCompatActivity {
         builder.setCancelable(false);
         builder.setTitle(Finalwinner);
         builder.setMessage(message);
-        builder.setNeutralButton("Share Victory", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton("Share Victory on Facebook", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                //share intent
-                Uri imageUri = Uri.parse("android.resource://" + getPackageName()
-                        + "/drawable/" + "ic_launcher");
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, winner + " has WON from " + loser + " in Pietjesbak Game.");
-                shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-                shareIntent.setType("image/jpeg");
-                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                startActivity(Intent.createChooser(shareIntent, "send"));
+
+                shareOnFB();
+                resetGame();
 
             }
         });
         builder.setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                //reset game
+                resetGame();
                 dialog.cancel();
-                linesPlayer1 = 5;
-                linesPlayer2 = 5;
-                scorePlayer1 = 0;
-                scorePlayer2 = 0;
-                score = 0;
-                rollsLeft = 3;
-                canSwipePlayer1 = false;
-                canSwipePlayer2 = false;
-                player1active = true;
-                drawLinesPlayer1();
-                drawLinesPlayer2();
-                tv_score1.setText("Score: " + score);
-                tv_score2.setText("Score: " + score);
             }
         });
         builder.show();
+    }
+
+    private void resetGame() {
+
+        //reset game
+        linesPlayer1 = 5;
+        linesPlayer2 = 5;
+        scorePlayer1 = 0;
+        scorePlayer2 = 0;
+        score = 0;
+        rollsLeft = 3;
+        canSwipePlayer1 = false;
+        canSwipePlayer2 = false;
+        player1active = true;
+        drawLinesPlayer1();
+        drawLinesPlayer2();
+        tv_score1.setText("Score: " + score);
+        tv_score2.setText("Score: " + score);
+    }
+
+    private void shareOnFB() {
+
+        //share Facebook OpenGraph Story
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_launcher);
+        SharePhoto photo = new SharePhoto.Builder()
+                .setBitmap(bitmap)
+                .setUserGenerated(true)
+                .build();
+
+        // Create an object
+        ShareOpenGraphObject object = new ShareOpenGraphObject.Builder()
+                .putString("og:type", "games.victory")
+                .putString("og:title", winner + " has WON from " + loser)
+                .putString("og:description", "The classic Flemish pubgame on Android")
+                .putString("og:image:url","android.resource://" + getPackageName() + "/drawable/" + "logo_launcher.png")
+                .build();
+        // Create an action
+        ShareOpenGraphAction action = new ShareOpenGraphAction.Builder()
+                .setActionType("games.celebrate")
+                .putObject("games:victory", object)
+                .putPhoto("image", photo)
+                .build();
+        // Create the content
+        ShareOpenGraphContent content = new ShareOpenGraphContent.Builder()
+                .setPreviewPropertyName("games:victory")
+                .setAction(action)
+                .build();
+
+        ShareDialog.show(MainActivity.this, content);
     }
 
 

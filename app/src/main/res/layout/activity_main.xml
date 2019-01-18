@@ -9,7 +9,6 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/RelativeLayout03"
@@ -103,13 +102,12 @@
             android:id="@+id/throwsLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
+            android:layout_below="@id/chk2"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="0dp"
             android:text="@string/throwsLeft"
             android:textColor="@color/TextColor"
-            android:textSize="18dp"
-            android:layout_below="@id/dice2"
-            android:layout_centerHorizontal="true"
-            />
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/quitGame"
@@ -164,7 +162,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_margin="5dp"
                 android:layout_toRightOf="@id/roll"
-                android:background="@drawable/btnregis_style"
+                android:background="@drawable/btn_alt"
                 android:backgroundTint="@color/PassGrey"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
@@ -172,6 +170,32 @@
                 android:textColor="@color/TextColor" />
 
         </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/chk1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dice1"
+            android:layout_centerHorizontal="true"
+            android:layout_toLeftOf="@id/chk2"
+            android:checked="false" />
+
+        <CheckBox
+            android:id="@+id/chk2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dice1"
+            android:layout_centerHorizontal="true"
+            android:checked="false" />
+
+        <CheckBox
+            android:id="@+id/chk3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dice1"
+            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@id/chk2"
+            android:checked="false" />
 
     </RelativeLayout>
 
