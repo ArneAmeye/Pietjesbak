@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView dice1img, dice2img, dice3img, lines1img, lines2img;
     CheckBox chk1, chk2, chk3;
     int rollsLeft = 3, score = 0, valueDice1, valueDice2, valueDice3, scorePlayer1, scorePlayer2, linesPlayer1 =5, linesPlayer2 = 5;
-    boolean player1active = true, canSwipePlayer1 = false, canSwipePlayer2 = false;
+    boolean player1active = true, canSwipePlayer1 = false, canSwipePlayer2 = false, player2ThrowAfterPass = false;
     boolean check69[] = {false, false, false};
     String scoreText, swipeLines, winner, loser;
     private int min = 1, max = 6;
@@ -95,15 +95,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //make sure all dices are selected for first roll!
-                if(rollsLeft == 3 && (chk1.isChecked() || chk2.isChecked() || chk3.isChecked() )){
+                if( (rollsLeft == 3 && (chk1.isChecked() || chk2.isChecked() || chk3.isChecked() )) ||(player2ThrowAfterPass && (chk1.isChecked() || chk2.isChecked() || chk3.isChecked() )) ){
                     //show toast that player needs to roll al dices the first time
                     Toast.makeText(MainActivity.this, "First throw needs all dices, deselect them!", Toast.LENGTH_SHORT).show();
 
-                }else{
+                }
+                else{
                     //not first throw or all dices deselected in first throw, move on with throwing the dices
                     rollsLeft -= 1;
                     tvRollsLeft.setText("Rolls left: " + String.valueOf(rollsLeft));
 
+                    //reset flag for player2ThrowAfterPass if player2 has rolled the dice
+                    if(!player1active){
+                        player2ThrowAfterPass = false;
+                    }
+
+                    //throw dices and show roll score
                     diceRoll();
                     calculateScore();
 
@@ -166,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                         player1active = false;
                         rollsLeft = 3 - rollsLeft;
                         tvRollsLeft.setText("Rolls left: " + String.valueOf(rollsLeft));
+                        player2ThrowAfterPass = true;
 
                     } else {
                         player2.setTextColor(getResources().getColor(R.color.TextColor));

@@ -175,6 +175,7 @@
             android:id="@+id/chk1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@drawable/chk_style"
             android:layout_below="@id/dice1"
             android:layout_centerHorizontal="true"
             android:layout_toLeftOf="@id/chk2"
@@ -184,6 +185,7 @@
             android:id="@+id/chk2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@drawable/chk_style"
             android:layout_below="@id/dice1"
             android:layout_centerHorizontal="true"
             android:checked="false" />
@@ -192,6 +194,7 @@
             android:id="@+id/chk3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@drawable/chk_style"
             android:layout_below="@id/dice1"
             android:layout_centerHorizontal="true"
             android:layout_toRightOf="@id/chk2"
